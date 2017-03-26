@@ -5,6 +5,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @quizzes = Quiz.all
+    @grades = @user.grades
+    @total_score = 0
   end
 
   def index

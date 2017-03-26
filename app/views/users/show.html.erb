@@ -5,3 +5,14 @@
 <h3>
   <%= @user.section %>
 </h3>
+
+<ul>
+  <% @grades.each do |grade| %>
+      <li>
+        <%= grade.quiz.name %>: <%= grade.value %>
+        <% @total_score += grade.value %>
+      </li>
+  <% end %>
+</ul>
+
+Total Score: <%= @total_score %>

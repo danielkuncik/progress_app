@@ -14,15 +14,41 @@
 #User.create(name: 'madison', section: 'virgina')
 #User.create(name: 'adams', section: 'massachusetts')
 
+public
+
+def is_first_letter_upper?
+  self[0] == self[0].upcase
+end
+
+def is_first_letter_lower?
+  self[0] == self[0].downcase
+end
 
 require 'csv'
 
-csv_text = File.read(Rails.root.join('lib','seeds','formative_results.csv'))
+private
 
+headers = CSV.open(Rails.root.join('lib','seeds','interim_q3.csv')) {|csv| csv.first}
+headers.each do |quiz|
+  if quiz.is_first_letter_upper?
+    Quiz.create(name: quiz)
+  end
+end
+
+csv_text = File.read(Rails.root.join('lib','seeds','interim_q3.csv'))
 
 CSV.parse(csv_text, :headers => true) do |row|
-  User.create(name: row['username'], section: row['section'],
+  student_name = row['username']
+  User.create(name: student_name, section: row['section'],
               password: row['passcode'], password_confirmation: row['password'])
+
+  row.to_hash.each do |quiz_name,grade|
+
+    if grade != nil && quiz_name.is_first_letter_upper?
+      Grade.create(value: grade.to_i, user: User.find_by(name: student_name), quiz: Quiz.find_by(name: quiz_name) )
+    end
+
+  end
 end
 
 #CSV.foreach('formative_results.csv', :headers => true)  do |row|
