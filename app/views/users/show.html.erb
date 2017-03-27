@@ -10,9 +10,21 @@
   <% @grades.each do |grade| %>
       <li>
         <%= grade.quiz.name %>: <%= grade.value %>
-        <% @total_score += grade.value %>
       </li>
   <% end %>
+  <li>Total Score: <%= @total_score %></li>
+  <li>Your category: <%= @category %></li>
 </ul>
 
-Total Score: <%= @total_score %>
+
+<p>
+  There were 24 total multiple choice questions.
+  Each open resposne question was worth 4 points.
+The total number of points on the whole test was 36.
+If you scored 28 or above, you scored "Advanced." (you got an A)
+If you scored between 20 and 27, you scored "Proficient." (you got a B)
+If you scored between 12 and 19, you scored "Needs Improvement." (you got a C)
+If you scored less than 11, you scored "Warning." (you got an F)
+</p>
+
+
