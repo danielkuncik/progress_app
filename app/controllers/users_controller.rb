@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   end
 
   def show
+    if not session[:user_id] == Integer(params[:id])
+      redirect_to root_url
+    end
+
     @user = User.find(params[:id])
     @quizzes = Quiz.all
     @grades = @user.grades
@@ -25,6 +29,9 @@ class UsersController < ApplicationController
   end
 
   def index
+    if session[:user_id] != 1
+      redirect_to root_url
+    end
     @users = User.all
   end
 
