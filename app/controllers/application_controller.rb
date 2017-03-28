@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
 
   def hello
-    render html: "hello, its me. ive been wondering if after all these years youd like to meet"
+    render html: "Mr. Kuncik's Progress App"
   end
 
 
