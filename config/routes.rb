@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'quiz_categories/show'
+
   get 'sessions/new'
 
   get 'users/new'
@@ -7,6 +9,8 @@ Rails.application.routes.draw do
   get '/users/:id', to: 'users#show'
 
   root 'application#hello'
+
+  get '/category/:id', to: 'quiz_categories#show'
 
 
   get '/login', to: 'sessions#new'

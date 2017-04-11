@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170326170950) do
+ActiveRecord::Schema.define(version: 20170411190506) do
 
   create_table "grades", force: :cascade do |t|
     t.integer  "value"
@@ -22,10 +22,21 @@ ActiveRecord::Schema.define(version: 20170326170950) do
     t.index ["user_id"], name: "index_grades_on_user_id"
   end
 
-  create_table "quizzes", force: :cascade do |t|
+  create_table "quiz_categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "quiz_category_id"
+    t.integer  "level"
+    t.integer  "max_score",        default: 20
+    t.text     "objective"
+    t.index ["quiz_category_id"], name: "index_quizzes_on_quiz_category_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,8 @@
+<h1> <%= @category.name %> </h1>
+<ul>
+  <% @quizzes.each do |quiz| %>
+    <li>
+      <%= quiz.name %> -------- <%= quiz.objective %>
+    </li>
+  <% end %>
+</ul>

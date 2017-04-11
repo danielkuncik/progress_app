@@ -28,6 +28,23 @@ require 'csv'
 
 private
 
+
+
+csv_text = File.read(Rails.root.join('lib','seeds','quizzes_with_categories.csv'))
+
+CSV.parse(csv_text, :headers => true) do |row|
+  category = row['category']
+  if QuizCategory.find_by(name: category).nil?
+    QuizCategory.create(name: category)
+  end
+  Quiz.create(name: row['quiz_name'], level: row['level'].to_i, objective: row['objective'], quiz_category: QuizCategory.find_by(name: category))
+end
+
+## to download a CSV of quizzes and categories
+
+
+## to download the interim Q3 csv file
+=begin
 headers = CSV.open(Rails.root.join('lib','seeds','interim_q3.csv')) {|csv| csv.first}
 headers.each do |quiz|
   if quiz.is_first_letter_upper?
@@ -54,3 +71,5 @@ end
 #CSV.foreach('formative_results.csv', :headers => true)  do |row|
 #  User.create(name: row['name'], section: row['section'])
 #end
+
+=end
