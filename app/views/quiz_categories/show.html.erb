@@ -6,3 +6,14 @@
     </li>
   <% end %>
 </ul>
+
+
+<div id = 'putItHere'></div>
+
+<script>
+  var myQuizMap = new QuizMap(25);
+  <% @quizzes.each do |quiz| %>
+    myQuizMap.addQuiz("<%= quiz.name %>", <%= quiz.level %>)
+  <% end %>
+  myQuizMap.drawQuizMapCanvas();
+</script>
